@@ -17,7 +17,7 @@ int musicNumber;
 int j;
 
 // Variáveis do display TFT
-#define MOSI 23
+#define MOSI 23 
 #define SCLK 18
 #define DC 2
 #define CS 15
@@ -998,11 +998,11 @@ void setup()
 {
 
   //                    step, dir)
-  guitar.insertMotor('E', 25, 26);
-  //guitar.insertMotor('A', 14, 27);
-  //guitar.insertMotor('D', 26, 25);
+  guitar.insertMotor('E', 13, 12);
+  guitar.insertMotor('A', 14, 27);
+  guitar.insertMotor('D', 26, 25);
   //guitar.insertMotor('G', 33, 32); //
-  //guitar.insertMotor('B', 21, 3); //
+  guitar.insertMotor('B', 21, 3); //
   //guitar.insertMotor('e', 22, 1);
 
   pinMode(buttonUp, INPUT_PULLUP);
@@ -1064,5 +1064,5 @@ void loop()
     break;
   }
   }*/
-  guitar.parseFile("E ",1);
+  guitar.parseFile("EADB   E   A   D   B    ",1);
 }
