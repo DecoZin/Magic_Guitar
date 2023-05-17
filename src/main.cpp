@@ -1001,20 +1001,22 @@ void setup()
   guitar.insertMotor('E', 13, 12);
   guitar.insertMotor('A', 14, 27);
   guitar.insertMotor('D', 26, 25);
-  //guitar.insertMotor('G', 33, 32); //
+  guitar.insertMotor('G', 33, 32); //
   guitar.insertMotor('B', 21, 3); //
-  //guitar.insertMotor('e', 22, 1);
+  guitar.insertMotor('e', 22, 1);
 
+  pinMode(1, OUTPUT);
+  pinMode(3, OUTPUT); 
+  pinMode(17, OUTPUT);
+  pinMode(16, OUTPUT);
   pinMode(buttonUp, INPUT_PULLUP);
   pinMode(buttonSelect, INPUT_PULLUP);
   pinMode(buttonDown, INPUT_PULLUP);
 
-  Serial.begin(115200);
 
   //musicNames = sdCard.getList();
   //musicNumber = musicNames.size();
 
-  Serial.println("Procurando targets");
   //String currentTargets = "";
   //currentTargets = sdCard.getCurrentTarget();
   //guitar.setCurrentTarget(currentTargets);
@@ -1064,5 +1066,5 @@ void loop()
     break;
   }
   }*/
-  guitar.parseFile("EADB   E   A   D   B    ",1);
+  guitar.parseFile("EADGBe ",1);
 }
