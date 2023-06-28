@@ -1,5 +1,6 @@
 #include <SD.h>
 #include <SPI.h>
+#include "FS.h"
 #include <Arduino.h>
 #include <vector>
 #include <Adafruit_GFX.h>
@@ -17,14 +18,14 @@ int musicNumber;
 int j;
 
 // Variáveis do display TFT
-#define MOSI 23 
-#define SCLK 18
-#define DC 2
-#define CS 15
-#define RST 4
-Adafruit_ST7735 tft = Adafruit_ST7735(CS, DC, MOSI, SCLK, RST);
+#define TFT_MOSI 23 //também representado por SDA
+#define TFT_SCLK 18
+#define TFT_DC 2 // também representado por A0
+#define TFT_CS 15
+#define TFT_RST 4
+Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 
-int delayButtons = 150;
+int delayButtons = 250;
 #define buttonUp 35
 #define buttonSelect 17
 #define buttonDown 16
@@ -57,6 +58,7 @@ int targetScreen = 1;
 string defStroke = "";
 void taskStroke(void *parameter)
 {
+  readingButtons();
   guitar.parseFile(defStroke,0);
   lastStroke = 0;
   vTaskDelete(NULL);
@@ -73,38 +75,38 @@ void settings(int *targetScreen)
     if (posSettings == 2)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Menu:");
       tft.setTextSize(2);
       tft.println("");
       tft.write(16);
       tft.println("Musicas");
       tft.println(" Afinar");
-      tft.println(" Resetar motores");
+      tft.println(" Resetar");
     }
     if (posSettings == 3)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Menu:");
       tft.setTextSize(2);
       tft.println("");
       tft.println(" Musicas");
       tft.write(16);
       tft.println("Afinar");
-      tft.println(" Resetar motores");
+      tft.println(" Resetar");
     }
     if (posSettings == 4)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Menu:");
       tft.setTextSize(2);
       tft.println("");
       tft.println(" Musicas");
       tft.println(" Afinar");
       tft.write(16);
-      tft.println("Resetar motores");
+      tft.println("Resetar");
     }
 
     if (buttonUpState == 0 && posSettings != 2)
@@ -153,7 +155,7 @@ void strokes(string firstStroke, string secondStroke, string thirdStroke, int nS
       if (lastStroke == 0)
       {
         lastStroke = 1;
-        //xTaskCreatePinnedToCore(taskStroke, "taskStroke", 1000, NULL, 1, NULL, 0);
+        xTaskCreatePinnedToCore(taskStroke, "taskStroke", 1000, NULL, 1, NULL, 0);
       }
     }
     if (playingPos == 2)
@@ -173,7 +175,7 @@ void strokes(string firstStroke, string secondStroke, string thirdStroke, int nS
       if (lastStroke == 0)
       {
         lastStroke = 1;
-        //xTaskCreatePinnedToCore(taskStroke, "taskStroke", 1000, NULL, 1, NULL, 0);
+        xTaskCreatePinnedToCore(taskStroke, "taskStroke", 1000, NULL, 1, NULL, 0);
       }
     }
     if (playingPos == 3)
@@ -194,7 +196,7 @@ void strokes(string firstStroke, string secondStroke, string thirdStroke, int nS
       if (lastStroke == 0)
       {
         lastStroke = 1;
-        //xTaskCreatePinnedToCore(taskStroke, "taskStroke", 1000, NULL, 1, NULL, 0);
+        xTaskCreatePinnedToCore(taskStroke, "taskStroke", 1000, NULL, 1, NULL, 0);
       }
     }
 
@@ -403,9 +405,9 @@ void menu(int *targetScreen)
       if (musicNumber < 10)
       {
         tft.setCursor(0, 0);
-        tft.setTextSize(3);
-        tft.println("Musicas:");
         tft.setTextSize(2);
+        tft.println("Musicas:");
+        tft.setTextSize(1);
         tft.println("");
         for (j = 1; j < musicNumber + 1; j++)
         {
@@ -440,9 +442,9 @@ void menu(int *targetScreen)
       if (musicNumber > 9)
       {
         tft.setCursor(0, 0);
-        tft.setTextSize(3);
-        tft.println("Musicas:");
         tft.setTextSize(2);
+        tft.println("Musicas:");
+        tft.setTextSize(1);
         tft.println("");
         for (j = 1; j < 11; j++)
         {
@@ -479,9 +481,9 @@ void menu(int *targetScreen)
     if (presentScreen > 0 && presentScreen < screenNumber - 1)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
-      tft.println("Musicas:");
       tft.setTextSize(2);
+      tft.println("Musicas:");
+      tft.setTextSize(1);
       tft.println("");
       for (j = (10 * presentScreen) + 1; j < (10 * (presentScreen + 1)) + 1; j++)
       {
@@ -516,7 +518,7 @@ void menu(int *targetScreen)
     if (presentScreen == screenNumber - 1 && screenNumber != 1)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Musicas:");
       tft.setTextSize(2);
       tft.println("");
@@ -612,7 +614,7 @@ void afinar(int *targetScreen)
     if (tunePos == 0)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -628,7 +630,7 @@ void afinar(int *targetScreen)
     if (tunePos == 1)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -644,7 +646,7 @@ void afinar(int *targetScreen)
     if (tunePos == 2)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -660,7 +662,7 @@ void afinar(int *targetScreen)
     if (tunePos == 3)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -676,7 +678,7 @@ void afinar(int *targetScreen)
     if (tunePos == 4)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -692,7 +694,7 @@ void afinar(int *targetScreen)
     if (tunePos == 5)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -708,7 +710,7 @@ void afinar(int *targetScreen)
     if (tunePos == 6)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -739,7 +741,7 @@ void afinar(int *targetScreen)
     {
       if (tunePos != 6)
       {
-        //xTaskCreatePinnedToCore(taskTune, "taskTune", 1000, NULL, 1, NULL, 0);
+        xTaskCreatePinnedToCore(taskTune, "taskTune", 1000, NULL, 1, NULL, 0);
       }
       else
       {
@@ -767,7 +769,7 @@ void adjustEngine(int *resetPos)
     if (adjustPos == 0)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.print("Corda ");
       tft.print(guitarStringChr);
       tft.println(":");
@@ -781,7 +783,7 @@ void adjustEngine(int *resetPos)
     if (adjustPos == 1)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.print("Corda ");
       tft.print(guitarStringChr);
       tft.println(":");
@@ -795,7 +797,7 @@ void adjustEngine(int *resetPos)
     if (adjustPos == 2)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.print("Corda ");
       tft.print(guitarStringChr);
       tft.println(":");
@@ -854,7 +856,7 @@ void resetEngines(int *targetScreen)
     if (resetPos == 0)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -870,7 +872,7 @@ void resetEngines(int *targetScreen)
     if (resetPos == 1)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -886,7 +888,7 @@ void resetEngines(int *targetScreen)
     if (resetPos == 2)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -902,7 +904,7 @@ void resetEngines(int *targetScreen)
     if (resetPos == 3)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -918,7 +920,7 @@ void resetEngines(int *targetScreen)
     if (resetPos == 4)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -934,7 +936,7 @@ void resetEngines(int *targetScreen)
     if (resetPos == 5)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -950,7 +952,7 @@ void resetEngines(int *targetScreen)
     if (resetPos == 6)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(3);
+      tft.setTextSize(2);
       tft.println("Selecionar corda:");
       tft.setTextSize(2);
       tft.println("");
@@ -997,29 +999,28 @@ void resetEngines(int *targetScreen)
 void setup()
 {
 
+  Serial.begin(115200);
+
   //                    step, dir)
   guitar.insertMotor('E', 13, 12);
   guitar.insertMotor('A', 14, 27);
   guitar.insertMotor('D', 26, 25);
-  guitar.insertMotor('G', 33, 32); //
-  guitar.insertMotor('B', 21, 3); //
-  guitar.insertMotor('e', 22, 1);
+  ///guitar.insertMotor('D', 33, 32); //
+  //guitar.insertMotor('B', 21, 3); //
+  //guitar.insertMotor('e', 22, 1);
 
-  pinMode(1, OUTPUT);
-  pinMode(3, OUTPUT); 
-  pinMode(17, OUTPUT);
-  pinMode(16, OUTPUT);
+
   pinMode(buttonUp, INPUT_PULLUP);
   pinMode(buttonSelect, INPUT_PULLUP);
   pinMode(buttonDown, INPUT_PULLUP);
 
 
-  //musicNames = sdCard.getList();
-  //musicNumber = musicNames.size();
+  musicNames = sdCard.getList();
+  musicNumber = musicNames.size();
 
-  //String currentTargets = "";
-  //currentTargets = sdCard.getCurrentTarget();
-  //guitar.setCurrentTarget(currentTargets);
+  String currentTargets = "";
+  // currentTargets = sdCard.getCurrentTarget();
+  // guitar.setCurrentTarget(currentTargets);
 
   /*guitar.runHalfTarget(0);
   guitar.runHalfTarget(1);
@@ -1027,23 +1028,25 @@ void setup()
   guitar.runHalfTarget(3);
   guitar.runHalfTarget(4);
   guitar.runHalfTarget(5);*/
+  Serial.println("Inicializado display...");
 
   // Teste para a inicialização do TFT
-  //tft.initR(INITR_BLACKTAB);
-  //tft.setRotation(1);
+  tft.initR(INITR_BLACKTAB);
+  tft.setRotation(-1);
 
   // Inicializar a fonte com tamanho padrão
-  //tft.setTextSize(2);              // Tamanho do texto
-  //tft.setTextColor(ST7735_WHITE); // Cor do texto
+  tft.setTextSize(2);              // Tamanho do texto
+  tft.setTextColor(ST7735_WHITE); // Cor do texto
 
   // Limpa o display
-  //tft.fillScreen(ST7735_BLACK);
-  //readingButtons();
+  tft.fillScreen(ST7735_BLACK);
+
+  readingButtons();
   }
 
 void loop()
 {
-  /*switch (targetScreen)
+  switch (targetScreen)
   {
   case 1:
   {
@@ -1065,6 +1068,6 @@ void loop()
     resetEngines(&targetScreen);
     break;
   }
-  }*/
-  guitar.parseFile("EADGBe ",1);
+  }
+
 }

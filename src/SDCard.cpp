@@ -147,7 +147,7 @@ string SDCard::readFile(int pNumFile, char pNumStroke)
 void SDCard::writeInFile(vector<int> pEnginePos)
 {
   // const char * fileNamePtr = fileName.c_str();
-
+/*
   File textFile = SD.open("/final_position.txt", FILE_WRITE);
 
   if (textFile)
@@ -160,6 +160,7 @@ void SDCard::writeInFile(vector<int> pEnginePos)
     // textFile.println(enginePos);
     textFile.close();
   }
+  */
 }
 
 String SDCard::getCurrentTarget()
