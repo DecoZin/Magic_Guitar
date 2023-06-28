@@ -75,7 +75,7 @@ void settings(int *targetScreen)
     if (posSettings == 2)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(3);
       tft.println("Menu:");
       tft.setTextSize(2);
       tft.println("");
@@ -87,7 +87,7 @@ void settings(int *targetScreen)
     if (posSettings == 3)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(3);
       tft.println("Menu:");
       tft.setTextSize(2);
       tft.println("");
@@ -99,7 +99,7 @@ void settings(int *targetScreen)
     if (posSettings == 4)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(3);
       tft.println("Menu:");
       tft.setTextSize(2);
       tft.println("");
@@ -140,15 +140,15 @@ void strokes(string firstStroke, string secondStroke, string thirdStroke, int nS
     readingButtons();
     if (playingPos == 1)
     {
-      tft.setCursor(80, 0);
+      tft.setCursor(35, 0);//80,0
       tft.setTextSize(2);
       tft.println("BATIDA 1");
-      tft.setCursor(0, 100);
+      tft.setCursor(0, 55);//0,100
       tft.write(27);
-      tft.setCursor(300, 100);
+      tft.setCursor(148, 55);//300,100
       tft.write(26);
       tft.setTextSize(2);
-      tft.setCursor(100, 160);
+      tft.setCursor(40, 100);//100,160
       tft.write(16);
       tft.println("Voltar");
       defStroke = firstStroke;
@@ -160,15 +160,15 @@ void strokes(string firstStroke, string secondStroke, string thirdStroke, int nS
     }
     if (playingPos == 2)
     {
-      tft.setCursor(80, 0);
+      tft.setCursor(35, 0);
       tft.setTextSize(2);
       tft.println("BATIDA 2");
-      tft.setCursor(0, 100);
+      tft.setCursor(0, 55);
       tft.write(27);
-      tft.setCursor(300, 100);
+      tft.setCursor(148, 55);
       tft.write(26);
       tft.setTextSize(2);
-      tft.setCursor(100, 160);
+      tft.setCursor(40, 100);
       tft.write(16);
       tft.println("Voltar");
       defStroke = secondStroke;
@@ -180,16 +180,16 @@ void strokes(string firstStroke, string secondStroke, string thirdStroke, int nS
     }
     if (playingPos == 3)
     {
-      tft.setCursor(0, 0);
-      tft.setCursor(80, 0);
+      //tft.setCursor(0, 0);
+      tft.setCursor(35, 0);
       tft.setTextSize(2);
       tft.println("BATIDA 3");
-      tft.setCursor(0, 100);
+      tft.setCursor(0, 55);
       tft.write(27);
-      tft.setCursor(300, 100);
+      tft.setCursor(148, 55);
       tft.write(26);
       tft.setTextSize(2);
-      tft.setCursor(100, 160);
+      tft.setCursor(40, 100);
       tft.write(16);
       tft.println("Voltar");
       defStroke = thirdStroke;
@@ -353,13 +353,13 @@ void music(int music)
       if (buttonUpState == 0 && menuPos != 1)
       {
         menuPos--;
-        tft.fillRect(0, 200, 10, 40, ST7735_BLACK);
+        tft.fillRect(0, 200, 10, 150, ST7735_BLACK);
         delay(delayButtons);
       }
       if (buttonDownState == 0 && menuPos != 2)
       {
         menuPos++;
-        tft.fillRect(0, 200, 10, 40, ST7735_BLACK);
+        tft.fillRect(0, 200, 10, 150, ST7735_BLACK);
         delay(delayButtons);
       }
       if (buttonSelectState == 0)
@@ -556,7 +556,8 @@ void menu(int *targetScreen)
 
     if (buttonUpState == 0 && menuPos != 1)
     {
-      tft.fillRect(0, 24, 10, 225, ST7735_BLACK);
+      tft.fillRect(0, 20, 5, 100, ST7735_BLACK);
+      //tft.fillRect(0, 24, 10, 225, ST7735_BLACK);
       menuPos--;
       if (menuPos % 11 == 0)
       {
@@ -567,7 +568,8 @@ void menu(int *targetScreen)
     }
     if (buttonDownState == 0 && menuPos != menuPosMax)
     {
-      tft.fillRect(0, 24, 10, 225, ST7735_BLACK);
+      tft.fillRect(0, 20, 5, 100, ST7735_BLACK);
+      //tft.fillRect(0, 24, 10, 225, ST7735_BLACK);
       if (menuPos % 11 == 0)
       {
         presentScreen++;
@@ -614,9 +616,9 @@ void afinar(int *targetScreen)
     if (tunePos == 0)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.write(16);
       tft.println("Corda E");
@@ -630,9 +632,9 @@ void afinar(int *targetScreen)
     if (tunePos == 1)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.println(" Corda E");
       tft.write(16);
@@ -646,9 +648,9 @@ void afinar(int *targetScreen)
     if (tunePos == 2)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.println(" Corda E");
       tft.println(" Corda A");
@@ -662,9 +664,9 @@ void afinar(int *targetScreen)
     if (tunePos == 3)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.println(" Corda E");
       tft.println(" Corda A");
@@ -678,9 +680,9 @@ void afinar(int *targetScreen)
     if (tunePos == 4)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.println(" Corda E");
       tft.println(" Corda A");
@@ -694,9 +696,9 @@ void afinar(int *targetScreen)
     if (tunePos == 5)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.println(" Corda E");
       tft.println(" Corda A");
@@ -710,9 +712,9 @@ void afinar(int *targetScreen)
     if (tunePos == 6)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.println(" Corda E");
       tft.println(" Corda A");
@@ -728,13 +730,13 @@ void afinar(int *targetScreen)
     if (buttonUpState == 0 && tunePos != 0)
     {
       tunePos--;
-      tft.fillRect(0, 24, 10, 225, ST7735_BLACK);
+      tft.fillRect(0, 10, 5, 100, ST7735_BLACK);
       delay(delayButtons);
     }
     if (buttonDownState == 0 && tunePos != 6)
     {
       tunePos++;
-      tft.fillRect(0, 24, 10, 225, ST7735_BLACK);
+      tft.fillRect(0, 10, 5, 100, ST7735_BLACK);
       delay(delayButtons);
     }
     if (buttonSelectState == 0)
