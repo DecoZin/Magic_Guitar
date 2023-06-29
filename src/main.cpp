@@ -292,14 +292,15 @@ void music(int music)
 {
   // Declarando as variáveis locais
   tft.fillScreen(ST7735_BLACK);
-  string firstStroke = sdCard.readFile(1, '1');
-  string secondStroke = sdCard.readFile(1, '2');
-  string thirdStroke = sdCard.readFile(1, '3');
+  string firstStroke = sdCard.readFile(music, '1');
+  string secondStroke = sdCard.readFile(music, '2');
+  string thirdStroke = sdCard.readFile(music, '3');
 
   //funcao do SD que seta a velocidade SDCard.SD_SPEED
   guitar.setEngineSpeed(sdCard);
   //função do EnginesSet que seta o número de subdivisões SD_SUBDIVISION
   guitar.setSubdivision(sdCard);
+  
   
   int nStrokes = 3;
   if (secondStroke.length() == 0 && thirdStroke.length() == 0)
