@@ -37,7 +37,7 @@ void EnginesSet::addToenginesToPlay(std::string pGuitarStrings)
 
 void EnginesSet::playMany()
 {
-  Serial.println("Entrou no playmany!");
+  //Serial.println("Entrou no playmany!");
   for (int i = 0; i < mEnginesToPlay.size(); i++) {
     if (mEnginesToPlay[i]->getTarget() > 0) {
       digitalWrite(mEnginesToPlay[i]->getDir(), HIGH);
@@ -101,8 +101,8 @@ void EnginesSet::parseFile(std::string pStream, int pTune)
           subStream = subStream + pStream[strControl];
         }
         this->addToenginesToPlay(subStream);
-        Serial.println("Cordas do pulso:");
-        Serial.println(subStream.c_str());
+        //Serial.println("Cordas do pulso:");
+        //Serial.println(subStream.c_str());
         this->playMany();
         subStream = "";
       }
@@ -121,10 +121,10 @@ void EnginesSet::parseFile(std::string pStream, int pTune)
 
 void EnginesSet::runThrough(mDirection pDirection)
 {
-  Serial.println("Entrou em runThrough");
+  //Serial.println("Entrou em runThrough");
   if (pDirection == UP)
   {
-    Serial.println("Entrou na Subida");
+    //Serial.println("Entrou na Subida");
     for (auto it = this->mEngines.begin(); it != this->mEngines.end(); ++it)
     {
       this->mEnginesToPlay.push_back(*it);
@@ -134,7 +134,7 @@ void EnginesSet::runThrough(mDirection pDirection)
   }
   else
   {
-    Serial.println("Entrou na Descida");
+    //Serial.println("Entrou na Descida");
     for (auto it = this->mEngines.rbegin(); it != this->mEngines.rend(); ++it)
     {
       this->mEnginesToPlay.push_back(*it);
@@ -243,8 +243,8 @@ void EnginesSet::setEngineSpeed(SDCard pSd)
 void EnginesSet::setSubdivision(SDCard pSd)
 {
   mSubdivision = pSd.SD_SUBDIVISION;
-  Serial.println("Tipo de subdivisão: ");
-  Serial.println(mSubdivision.c_str());
+  //Serial.println("Tipo de subdivisão: ");
+  //Serial.println(mSubdivision.c_str());
 }
 
 void EnginesSet::setDelay()
@@ -278,12 +278,12 @@ void EnginesSet::setDelay()
     Serial.println("Nota não reconhecida!");
   }
 
-  Serial.println("BPM: ");
-  Serial.println(mBPMSpeed);
-  Serial.println("Sub: ");
-  Serial.println(mSubdivision.c_str());
-  Serial.println("Delay: ");
-  Serial.println(pDelay);
+  //Serial.println("BPM: ");
+  // Serial.println(mBPMSpeed);
+  // Serial.println("Sub: ");
+  // Serial.println(mSubdivision.c_str());
+  // Serial.println("Delay: ");
+  // Serial.println(pDelay);
 
   inteiro = (int)pDelay;
   tresDigitos = (pDelay - inteiro)*1000;
@@ -291,10 +291,10 @@ void EnginesSet::setDelay()
   mDelayMilis = inteiro;
   mDelayMicro = tresDigitos;
 
-  Serial.println("Parte inteira: ");
-  Serial.println(mDelayMilis);
-  Serial.println("Parte fracionária: ");
-  Serial.println(mDelayMicro);
+  // Serial.println("Parte inteira: ");
+  // Serial.println(mDelayMilis);
+  // Serial.println("Parte fracionária: ");
+  // Serial.println(mDelayMicro);
 
   // if(inteiro != 0) {
   //   delay(inteiro);

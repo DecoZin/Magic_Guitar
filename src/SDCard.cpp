@@ -34,16 +34,17 @@ void SDCard::printPosition(std::string pFileName)
   File textFile = SD.open(c);
   if (textFile)
   {
-    Serial.print("Conteudo do arquivo de posição: \n");
-    while (textFile.available())
-    {
-      Serial.write(textFile.read());
-    }
-    textFile.close();
+    //Serial.print("Conteudo do arquivo de posição: \n");
+    // Comentado para testar Integração 4.0
+    // while (textFile.available())
+    // {
+    //   Serial.write(textFile.read());
+    // }
+    // textFile.close();
   }
   else
   {
-    Serial.println("error opening file");
+    //Serial.println("error opening file");
   }
 }
 
