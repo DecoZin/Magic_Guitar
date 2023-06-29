@@ -204,7 +204,7 @@ void strokes(string firstStroke, string secondStroke, string thirdStroke, int nS
 
     if (buttonUpState == 0)
     {
-      tft.fillRect(200, 0, 30, 30, ST7735_BLACK);
+      tft.fillRect(114, 0, 20, 20, ST7735_BLACK);
       if (nStrokes == 3)
       {
         if (playingPos != 1)
@@ -242,7 +242,7 @@ void strokes(string firstStroke, string secondStroke, string thirdStroke, int nS
     }
     if (buttonDownState == 0)
     {
-      tft.fillRect(200, 0, 30, 30, ST7735_BLACK);
+      tft.fillRect(114, 0, 20, 20, ST7735_BLACK);
       if (nStrokes == 3)
       {
         if (playingPos != 3)
@@ -354,13 +354,13 @@ void music(int music)
       if (buttonUpState == 0 && menuPos != 1)
       {
         menuPos--;
-        tft.fillRect(0, 200, 10, 150, ST7735_BLACK);
+        tft.fillRect(0, 80, 10, 150, ST7735_BLACK);
         delay(delayButtons);
       }
       if (buttonDownState == 0 && menuPos != 2)
       {
         menuPos++;
-        tft.fillRect(0, 200, 10, 150, ST7735_BLACK);
+        tft.fillRect(0, 80, 10, 150, ST7735_BLACK);
         delay(delayButtons);
       }
       if (buttonSelectState == 0)
@@ -859,9 +859,9 @@ void resetEngines(int *targetScreen)
     if (resetPos == 0)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.write(16);
       tft.println("Corda E");
@@ -875,9 +875,9 @@ void resetEngines(int *targetScreen)
     if (resetPos == 1)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.println(" Corda E");
       tft.write(16);
@@ -891,9 +891,9 @@ void resetEngines(int *targetScreen)
     if (resetPos == 2)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.println(" Corda E");
       tft.println(" Corda A");
@@ -907,9 +907,9 @@ void resetEngines(int *targetScreen)
     if (resetPos == 3)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.println(" Corda E");
       tft.println(" Corda A");
@@ -923,9 +923,9 @@ void resetEngines(int *targetScreen)
     if (resetPos == 4)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.println(" Corda E");
       tft.println(" Corda A");
@@ -939,9 +939,9 @@ void resetEngines(int *targetScreen)
     if (resetPos == 5)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.println(" Corda E");
       tft.println(" Corda A");
@@ -955,9 +955,9 @@ void resetEngines(int *targetScreen)
     if (resetPos == 6)
     {
       tft.setCursor(0, 0);
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("Selecionar corda:");
-      tft.setTextSize(2);
+      tft.setTextSize(1);
       tft.println("");
       tft.println(" Corda E");
       tft.println(" Corda A");
@@ -973,13 +973,13 @@ void resetEngines(int *targetScreen)
     if (buttonUpState == 0 && resetPos != 0)
     {
       resetPos--;
-      tft.fillRect(0, 24, 10, 225, ST7735_BLACK);
+      tft.fillRect(0, 10, 5, 100, ST7735_BLACK);
       delay(delayButtons);
     }
     if (buttonDownState == 0 && resetPos != 6)
     {
       resetPos++;
-      tft.fillRect(0, 24, 10, 225, ST7735_BLACK);
+      tft.fillRect(0, 10, 5, 100, ST7735_BLACK);
       delay(delayButtons);
     }
     if (buttonSelectState == 0)
@@ -998,6 +998,7 @@ void resetEngines(int *targetScreen)
     }
   }
 }
+
 
 void setup()
 {
@@ -1031,7 +1032,7 @@ void setup()
   guitar.runHalfTarget(3);
   guitar.runHalfTarget(4);
   guitar.runHalfTarget(5);*/
-  //Serial.println("Inicializado display...");
+  Serial.println("Inicializado display...");
 
   // Teste para a inicialização do TFT
   tft.initR(INITR_BLACKTAB);
