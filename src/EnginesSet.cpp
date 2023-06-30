@@ -237,18 +237,14 @@ void EnginesSet::getEnginePos(SDCard pSd)
 
 void EnginesSet::endMusic()
 {
-  std::string negativeCords = "";
   for (int i = 0; i < mEngines.size(); i++)
   {
     //Serial.println(mEngines[i]->getPosition());
     if ( mEngines[i]->getPosition() == 0 )
     {
-      negativeCords = mEngines[i]->getGuitarString();
-      parseFile(negativeCords + " ", 0);
+      parseFile(mEngines[i]->getGuitarString() + " ", 0);
     }
-  }
-  Serial.println(negativeCords.c_str()); //
-  
+  }  
 }
 
 void EnginesSet::setEngineSpeed(SDCard pSd)

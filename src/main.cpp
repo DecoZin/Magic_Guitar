@@ -280,7 +280,6 @@ void strokes(string firstStroke, string secondStroke, string thirdStroke, int nS
     }
     if (buttonSelectState == 0)
     {
-      guitar.endMusic();
       returnPlaying = 1;
       delay(delayButtons);
     }
@@ -320,6 +319,11 @@ void music(int music)
   {
     while (goBack == 0)
     {
+      if(lastStroke == 0)
+      {
+        guitar.endMusic();
+      }
+
       readingButtons();
       if (menuPos == 1)
       {
