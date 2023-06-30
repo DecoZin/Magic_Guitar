@@ -42,6 +42,9 @@ public:
 
     void getEnginePos(SDCard pSd);
 
+    //Configura oposição após cada música
+    void endMusic();
+
     // configura velocidade a cada motor
     void setEngineSpeed(SDCard pSd); 
 

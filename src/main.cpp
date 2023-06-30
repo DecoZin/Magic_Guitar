@@ -280,6 +280,7 @@ void strokes(string firstStroke, string secondStroke, string thirdStroke, int nS
     }
     if (buttonSelectState == 0)
     {
+      guitar.endMusic();
       returnPlaying = 1;
       delay(delayButtons);
     }
@@ -998,7 +999,7 @@ void resetEngines(int *targetScreen)
 void setup()
 {
 
-  //Serial.begin(115200);
+  Serial.begin(115200);
 
   //                    step, dir)
   guitar.insertMotor('E', 13, 12);
@@ -1027,7 +1028,7 @@ void setup()
   guitar.runHalfTarget(3);
   guitar.runHalfTarget(4);
   guitar.runHalfTarget(5);*/
-  Serial.println("Inicializado display...");
+  //Serial.println("Inicializado display...");
 
   // Teste para a inicialização do TFT
   tft.initR(INITR_BLACKTAB);
