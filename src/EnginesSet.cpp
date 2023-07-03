@@ -77,6 +77,8 @@ void EnginesSet::playMany()
 
 void EnginesSet::parseFile(std::string pStream, int pTune)
 {
+  //Serial.println("Entrou parsefile...");
+  //Serial.println(pStream.c_str());
   char guitarString;
   std::string subStream = "";
   int forControl = 0;
@@ -237,12 +239,39 @@ void EnginesSet::getEnginePos(SDCard pSd)
 
 void EnginesSet::endMusic()
 {
+  //Serial.println("Entrou...");
+  string strA = "A";
+  string strE = "E";
+  string strD = "D";
+  string strB = "B";
+  string strG = "G";
+  string stre = "e";
   for (int i = 0; i < mEngines.size(); i++)
   {
     //Serial.println(mEngines[i]->getPosition());
-    if ( mEngines[i]->getPosition() == 0 )
+    if ( mEngines[i]->getPosition() == 30 && mEngines[i]->getGuitarString() == strA[0])
     {
-      parseFile(mEngines[i]->getGuitarString() + " ", 0);
+      parseFile(strA + " ", 1);
+    }
+    if ( mEngines[i]->getPosition() == 30 && mEngines[i]->getGuitarString() == strE[0])
+    {
+      parseFile(strE+ " ", 1);
+    }
+    if ( mEngines[i]->getPosition() == 30 && mEngines[i]->getGuitarString() == strD[0])
+    {
+      parseFile(strD + " ", 1);
+    }
+    if ( mEngines[i]->getPosition() == 30 && mEngines[i]->getGuitarString() == strB[0])
+    {
+      parseFile(strB + " ", 1);
+    }
+    if ( mEngines[i]->getPosition() == 30 && mEngines[i]->getGuitarString() == strG[0])
+    {
+      parseFile(strG+ " ", 1);
+    }
+    if ( mEngines[i]->getPosition() == 30 && mEngines[i]->getGuitarString() == stre[0])
+    {
+      parseFile(stre + " ", 1);
     }
   }  
 }
@@ -266,28 +295,28 @@ void EnginesSet::setDelay()
   int tresDigitos;
 
   if(mSubdivision == "seminima "){
-    pDelay = (60/mBPMSpeed) * (1) * 1000;
+    pDelay = (59/mBPMSpeed) * (1) * 1000;
   }
   else if(mSubdivision == "minima "){
-    pDelay = (60/mBPMSpeed) * (2) * 1000;
+    pDelay = (59/mBPMSpeed) * (2) * 1000;
   }
   else if(mSubdivision == "semibreve "){
-    pDelay = (60/mBPMSpeed) * (4) * 1000;
+    pDelay = (59/mBPMSpeed) * (4) * 1000;
   }
   else if(mSubdivision == "colcheia "){
     pDelay = (60/mBPMSpeed) * (0.5) * 1000;
   }
   else if(mSubdivision == "semicolcheia "){
-    pDelay = (60/mBPMSpeed) * (0.25) * 1000;
+    pDelay = (59/mBPMSpeed) * (0.25) * 1000;
   }
   else if(mSubdivision == "fusa "){
-    pDelay = (60/mBPMSpeed) * (0.125) * 1000;
+    pDelay = (59/mBPMSpeed) * (0.125) * 1000;
   }
   else if(mSubdivision == "semifusa "){
-    pDelay = (60/mBPMSpeed) * (0.0625) * 1000;
+    pDelay = (59/mBPMSpeed) * (0.0625) * 1000;
   }
   else{
-    Serial.println("Nota não reconhecida!");
+    //Serial.println("Nota não reconhecida!");
   }
 
   //Serial.println("BPM: ");
@@ -295,8 +324,9 @@ void EnginesSet::setDelay()
   // Serial.println("Sub: ");
   // Serial.println(mSubdivision.c_str());
   // Serial.println("Delay: ");
-  // Serial.println(pDelay);
+  Serial.println(pDelay);
 
+  pDelay = pDelay - 35.8;
   inteiro = (int)pDelay;
   tresDigitos = (pDelay - inteiro)*1000;
 

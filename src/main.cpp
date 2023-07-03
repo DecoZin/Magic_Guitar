@@ -27,8 +27,8 @@ Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 
 int delayButtons = 250;
 #define buttonUp 35
-#define buttonSelect 17
-#define buttonDown 16
+#define buttonSelect 16
+#define buttonDown 17
 
 int exitLoop = 0;
 
@@ -301,7 +301,6 @@ void music(int music)
   //função do EnginesSet que seta o número de subdivisões SD_SUBDIVISION
   guitar.setSubdivision(sdCard);
   
-  
   int nStrokes = 3;
   if (secondStroke.length() == 0 && thirdStroke.length() == 0)
   {
@@ -316,6 +315,7 @@ void music(int music)
   int goBackMusica = 0;
   int menuPos = 1;
   while (goBackMusica == 0)
+
   {
     while (goBack == 0)
     {
@@ -749,6 +749,7 @@ void afinar(int *targetScreen)
       }
       else
       {
+        guitar.endMusic();
         tft.fillScreen(ST7735_BLACK);
         goBack = 1;
         *targetScreen = 1;
