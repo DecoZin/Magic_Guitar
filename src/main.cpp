@@ -1004,15 +1004,15 @@ void resetEngines(int *targetScreen)
 void setup()
 {
 
-  Serial.begin(115200);
+  //Serial.begin(115200);
 
   //                    step, dir)
-  guitar.insertMotor('E', 13, 12);
-  guitar.insertMotor('A', 14, 27);
-  guitar.insertMotor('D', 26, 25);
-  ///guitar.insertMotor('D', 33, 32); //
-  //guitar.insertMotor('B', 21, 3); //
-  //guitar.insertMotor('e', 22, 1);
+  guitar.insertMotor('G', 13, 12);//antigo E
+  guitar.insertMotor('X', 14, 27); 
+  guitar.insertMotor('e', 26, 25);
+  guitar.insertMotor('B', 33, 32); //antigo G
+  guitar.insertMotor('X', 21, 3); //antigo B
+  guitar.insertMotor('E', 22, 1);
 
 
   pinMode(buttonUp, INPUT_PULLUP);

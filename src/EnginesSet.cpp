@@ -2,7 +2,7 @@
 
 EnginesSet::EnginesSet()
 {
-  mGlobalTargets = 30;
+  mGlobalTargets = 16;
   //   mExitLoop = 0;
   //   mButtonUpState = digitalRead(buttonUp);
   //   mButtonSelectState = digitalRead(buttonSelect);
@@ -249,27 +249,27 @@ void EnginesSet::endMusic()
   for (int i = 0; i < mEngines.size(); i++)
   {
     //Serial.println(mEngines[i]->getPosition());
-    if ( mEngines[i]->getPosition() == 30 && mEngines[i]->getGuitarString() == strA[0])
+    if ( mEngines[i]->getPosition() == mGlobalTargets && mEngines[i]->getGuitarString() == strA[0])
     {
       parseFile(strA + " ", 1);
     }
-    if ( mEngines[i]->getPosition() == 30 && mEngines[i]->getGuitarString() == strE[0])
+    if ( mEngines[i]->getPosition() == mGlobalTargets && mEngines[i]->getGuitarString() == strE[0])
     {
       parseFile(strE+ " ", 1);
     }
-    if ( mEngines[i]->getPosition() == 30 && mEngines[i]->getGuitarString() == strD[0])
+    if ( mEngines[i]->getPosition() == mGlobalTargets && mEngines[i]->getGuitarString() == strD[0])
     {
       parseFile(strD + " ", 1);
     }
-    if ( mEngines[i]->getPosition() == 30 && mEngines[i]->getGuitarString() == strB[0])
+    if ( mEngines[i]->getPosition() == mGlobalTargets && mEngines[i]->getGuitarString() == strB[0])
     {
       parseFile(strB + " ", 1);
     }
-    if ( mEngines[i]->getPosition() == 30 && mEngines[i]->getGuitarString() == strG[0])
+    if ( mEngines[i]->getPosition() == mGlobalTargets && mEngines[i]->getGuitarString() == strG[0])
     {
       parseFile(strG+ " ", 1);
     }
-    if ( mEngines[i]->getPosition() == 30 && mEngines[i]->getGuitarString() == stre[0])
+    if ( mEngines[i]->getPosition() == mGlobalTargets && mEngines[i]->getGuitarString() == stre[0])
     {
       parseFile(stre + " ", 1);
     }
