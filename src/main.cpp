@@ -27,8 +27,8 @@ Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 
 int delayButtons = 250;
 #define buttonUp 35
-#define buttonSelect 17
-#define buttonDown 16
+#define buttonSelect 16
+#define buttonDown 17
 
 int exitLoop = 0;
 
@@ -280,7 +280,6 @@ void strokes(string firstStroke, string secondStroke, string thirdStroke, int nS
     }
     if (buttonSelectState == 0)
     {
-      guitar.endMusic();
       returnPlaying = 1;
       delay(delayButtons);
     }
@@ -302,7 +301,6 @@ void music(int music)
   //função do EnginesSet que seta o número de subdivisões SD_SUBDIVISION
   guitar.setSubdivision(sdCard);
   
-  
   int nStrokes = 3;
   if (secondStroke.length() == 0 && thirdStroke.length() == 0)
   {
@@ -317,9 +315,15 @@ void music(int music)
   int goBackMusica = 0;
   int menuPos = 1;
   while (goBackMusica == 0)
+
   {
     while (goBack == 0)
     {
+      if(lastStroke == 0)
+      {
+        guitar.endMusic();
+      }
+
       readingButtons();
       if (menuPos == 1)
       {
@@ -745,6 +749,7 @@ void afinar(int *targetScreen)
       }
       else
       {
+        guitar.endMusic();
         tft.fillScreen(ST7735_BLACK);
         goBack = 1;
         *targetScreen = 1;
@@ -999,15 +1004,15 @@ void resetEngines(int *targetScreen)
 void setup()
 {
 
-  Serial.begin(115200);
+  //Serial.begin(115200);
 
   //                    step, dir)
-  guitar.insertMotor('E', 13, 12);
-  guitar.insertMotor('A', 14, 27);
-  guitar.insertMotor('D', 26, 25);
-  ///guitar.insertMotor('D', 33, 32); //
-  //guitar.insertMotor('B', 21, 3); //
-  //guitar.insertMotor('e', 22, 1);
+  guitar.insertMotor('G', 13, 12);//antigo E
+  guitar.insertMotor('X', 14, 27); 
+  guitar.insertMotor('e', 26, 25);
+  guitar.insertMotor('B', 33, 32); //antigo G
+  guitar.insertMotor('X', 21, 3); //antigo B
+  guitar.insertMotor('E', 22, 1);
 
 
   pinMode(buttonUp, INPUT_PULLUP);
